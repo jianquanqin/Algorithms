@@ -1,28 +1,35 @@
 package BLC
 
-func main() {
+import (
+	"errors"
+	"fmt"
+)
 
-	cq := &CircleQueue{MaxSize: 5, Head: 0, Tail: 0}
+//Test example
 
-	//添加元素
-	cq.Push(1)
-	cq.Push(2)
-	cq.Push(3)
-	cq.Push(4)
-
-	//显示队列
-	cq.Show()
-	//取出元素
-	cq.Pop()
-
-	//队列中还剩多少个元素
-	count := cq.Count()
-	fmt.Println(count)
-
-	//显示队列
-	cq.Show()
-
-}
+//func main() {
+//
+//	cq := &CircleQueue{MaxSize: 5, Head: 0, Tail: 0}
+//
+//	//添加元素
+//	cq.Push(1)
+//	cq.Push(2)
+//	cq.Push(3)
+//	cq.Push(4)
+//
+//	//显示队列
+//	cq.Show()
+//	//取出元素
+//	cq.Pop()
+//
+//	//队列中还剩多少个元素
+//	count := cq.Count()
+//	fmt.Println(count)
+//
+//	//显示队列
+//	cq.Show()
+//
+//}
 
 type CircleQueue struct {
 	MaxSize int
