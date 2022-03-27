@@ -5,27 +5,29 @@ import (
 	"fmt"
 )
 
-func main() {
-	queue := &Queue{
-		Maxsize: 5,
-		Front:   -1,
-		Rear:    -1,
-	}
-	queue.In(1)
-	queue.In(2)
-	queue.In(3)
-	queue.In(4)
-	queue.In(5)
-	queue.In(6)
+//Test example
 
-	queue.Show()
-
-	val, _ := queue.Out()
-	fmt.Println("the out value is:", val)
-
-	queue.Show()
-
-}
+//func main() {
+//	queue := &Queue{
+//		Maxsize: 5,
+//		Front:   -1,
+//		Rear:    -1,
+//	}
+//	queue.In(1)
+//	queue.In(2)
+//	queue.In(3)
+//	queue.In(4)
+//	queue.In(5)
+//	queue.In(6)
+//
+//	queue.Show()
+//
+//	val, _ := queue.Out()
+//	fmt.Println("the out value is:", val)
+//
+//	queue.Show()
+//
+//}
 
 //定义一个队列对象
 
