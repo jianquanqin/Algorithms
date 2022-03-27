@@ -5,26 +5,28 @@ import (
 	"fmt"
 )
 
-func main() {
+//Test example
 
-	stack := &Stack{
-		MaxTop: 5,
-		Top:    -1,
-	}
-	//入栈
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
-	stack.Push(4)
-	stack.Push(5)
-
-	//出栈
-	val, _ := stack.Pop()
-	fmt.Println(val)
-
-	//遍历栈
-	stack.Range()
-}
+//func main() {
+//
+//	stack := &Stack{
+//		MaxTop: 5,
+//		Top:    -1,
+//	}
+//	//入栈
+//	stack.Push(1)
+//	stack.Push(2)
+//	stack.Push(3)
+//	stack.Push(4)
+//	stack.Push(5)
+//
+//	//出栈
+//	val, _ := stack.Pop()
+//	fmt.Println(val)
+//
+//	//遍历栈
+//	stack.Range()
+//}
 
 //创建栈
 

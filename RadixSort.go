@@ -1,25 +1,21 @@
 package BLC
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
-)
+//Test example
 
-func main() {
-
-	var slice []int
-	//生成一个随机数组
-	rand.Seed(time.Now().UnixNano())
-	for index := 0; index <= 20; index++ {
-		num := rand.Intn(1000)
-		slice = append(slice, num)
-	}
-
-	fmt.Println("生成的数列是：", slice)
-	fmt.Println("排好的顺序是：", RadixSort(slice))
-
-}
+//func main() {
+//
+//	var slice []int
+//	//生成一个随机数组
+//	rand.Seed(time.Now().UnixNano())
+//	for index := 0; index <= 20; index++ {
+//		num := rand.Intn(1000)
+//		slice = append(slice, num)
+//	}
+//
+//	fmt.Println("生成的数列是：", slice)
+//	fmt.Println("排好的顺序是：", RadixSort(slice))
+//
+//}
 
 func RadixSort(s []int) []int {
 	max := Maxvalue(s)
