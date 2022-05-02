@@ -11,6 +11,8 @@ type LinearList struct {
 	Len     int
 }
 
+//1.插入
+
 func (list *LinearList) InsertLinearList(i int, value int) {
 	//判断表是否已经满了
 	if len(list.IntList) == list.Len {
@@ -30,6 +32,8 @@ func (list *LinearList) InsertLinearList(i int, value int) {
 	list.Len++
 }
 
+//2.删除
+
 func (list *LinearList) DeleteLinearList(i int) {
 	//判断表是否已经空了了
 	if list.Len == 0 {
@@ -45,6 +49,25 @@ func (list *LinearList) DeleteLinearList(i int) {
 		list.IntList[k-1] = list.IntList[k]
 	}
 	list.Len--
+}
+
+//3.排序
+
+func BubbleSortLinearList(nums []int) {
+
+	for i := 0; i < len(nums); i++ {
+		change := false
+		for j := 0; j < (len(nums) - 1); j++ {
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+				change = true
+			}
+		}
+		if change == false {
+			//fmt.Println(nums) //演示排序过程，如果排好提前结束
+			return
+		}
+	}
 }
 
 //使用结构体定义长度可变的线性表
