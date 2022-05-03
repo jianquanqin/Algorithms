@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"algorithms_examples/algorithms_examples/src"
+	"fmt"
+)
 
 func main() {
-	fmt.Println("hello world")
+	nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10}
+	fmt.Println(src.BinarySearch(nums, 8))
 }
