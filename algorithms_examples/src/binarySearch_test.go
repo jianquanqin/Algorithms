@@ -27,9 +27,9 @@ func TestSearch(t *testing.T) {
 //155.寻找旋转排序数组中的最小值II
 
 func TestFindMin(t *testing.T) {
-	nums := []int{3, 3, 0, 3}
+	nums := []int{3, 3, 1, 3, 3, 3, 3, 3}
 	fmt.Println(FindMinII(nums))
-	fmt.Println(FindMinI(nums))
+	//fmt.Println(FindMinI(nums))
 }
 
 //74. 搜索二维矩阵
@@ -49,5 +49,23 @@ func TestSearchMatrix(t *testing.T) {
 func TestBinarySearch(t *testing.T) {
 	nums := []int{0}
 	fmt.Println(searchRange(nums, 0))
+
+}
+
+//81. 搜索旋转排序数组 II
+
+func TestSearchII(t *testing.T) {
+	nums := []int{1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+
+	fmt.Println(SearchII(nums, 0))
+}
+
+//162. 寻找峰值
+
+func TestFindPeakElement(t *testing.T) {
+
+	nums := []int{1, 2, 0, 3, 1, 5, 6, 3}
+
+	fmt.Println(FindPeakElement(nums))
 
 }

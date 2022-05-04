@@ -1,6 +1,10 @@
 package src
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"math/rand"
+)
 
 //经典查找算法之：1.二分查找
 
@@ -197,7 +201,7 @@ func FindMinI(nums []int) int {
 	return nums[l]
 }
 
-//范例 5: 155.寻找旋转排序数组中的最小值II
+//范例 5: 154.寻找旋转排序数组中的最小值II
 //解题技巧：寻找模糊值，模版二
 //注意⚠️，此题应多次回顾，二分 + 朴素求解
 
@@ -206,7 +210,7 @@ func FindMinII(nums []int) int {
 	r := len(nums) - 1
 	//搜索模糊值用，l < r
 	for l < r {
-		m := l + (r-l)/2 //让二分查指的中间元素为右边的一个
+		m := (r + l) / 2 //让二分查指的中间元素为右边的一个
 		//判断当前值是是否在左半边部分，如果是，则在右半边搜索
 		if nums[m] > nums[r] {
 			l = m + 1
@@ -323,7 +327,7 @@ func searchRange(nums []int, target int) []int {
 }
 
 //范例 8: 69. x 的平方根
-//解题技巧：寻找模糊值，模版一
+//解题技巧：寻找具体值，模版一
 //注意⚠️，此题应多次回顾
 
 func mySqrt(x int) int {
@@ -347,4 +351,77 @@ func mySqrt(x int) int {
 		}
 	}
 	return ans
+}
+
+//范例 9: 81. 搜索旋转排序数组 II
+//解题技巧：寻找精确值，模版一
+//注意⚠️，此题应多次回顾,也是暴力求解和二分法的结合，问题演变成如何在相同的数中找出不同值
+//注意与154题的区别
+
+func SearchII(nums []int, target int) bool {
+
+	if len(nums) == 0 {
+		fmt.Println("sorry, the nums is empty")
+		return false
+	}
+
+	l := 0
+	r := len(nums) - 1
+
+	for l <= r {
+		m := (l + r) / 2
+
+		fmt.Println("index:", m)
+		if nums[m] == target {
+			//fmt.Println("index:", m)
+			return true
+			//如果左边升序
+		} else if nums[m] == nums[l] && nums[m] == nums[r] {
+			l++
+			r--
+		} else if nums[l] <= nums[m] {
+			if target >= nums[l] && target < nums[m] {
+				r = m - 1
+			} else {
+				l = m + 1
+			}
+			//如果右边升序
+		} else if nums[m] <= nums[r] {
+			if target > nums[m] && target <= nums[r] {
+				l = m + 1
+			} else {
+				r = m - 1
+			}
+		}
+	}
+	return false
+}
+
+//范例 9: 162. 寻找峰值
+
+func FindPeakElement(nums []int) int {
+
+	n := len(nums)
+	idx := rand.Intn(n)
+
+	// 辅助函数，输入下标 i，返回 nums[i] 的值
+	// 方便处理 nums[-1] 以及 nums[n] 的边界情况
+	// 辅助函数，在函数内部被定义
+
+	get := func(i int) int {
+		if i == -1 || i == n {
+			return math.MinInt64
+		}
+		return nums[i]
+	}
+
+	for !(get(idx-1) < get(idx) && get(idx) > get(idx+1)) {
+		if get(idx) < get(idx+1) {
+			idx++
+		} else {
+			idx--
+		}
+	}
+
+	return idx
 }
