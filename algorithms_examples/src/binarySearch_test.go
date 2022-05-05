@@ -69,3 +69,11 @@ func TestFindPeakElement(t *testing.T) {
 	fmt.Println(FindPeakElement(nums))
 
 }
+
+func TestTwoSum(t *testing.T) {
+
+	nums := []int{-1, -1, 1}
+
+	fmt.Println(TwoSum(nums, -2))
+
+}

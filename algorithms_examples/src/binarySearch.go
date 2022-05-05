@@ -425,3 +425,42 @@ func FindPeakElement(nums []int) int {
 
 	return idx
 }
+
+//范例10. 167. 两数之和 II - 输入有序数组
+//模版二
+
+func TwoSum(numbers []int, target int) []int {
+	var result []int
+	l := 0
+	r := len(numbers) - 1
+
+	for l < r {
+		m := (l + r) / 2
+		//fmt.Println("m", m)
+
+		if numbers[m] > target {
+			r = m
+			if numbers[l]+numbers[r] == target {
+				return append(result, l+1, r+1)
+			}
+		} else if target == (numbers[m] + numbers[r]) {
+			return append(result, m+1, r+1)
+		} else if target > (numbers[m] + numbers[r]) {
+			l = m + 1
+		} else {
+			for l < r {
+				if numbers[l]+numbers[r] == target {
+					return append(result, l+1, r+1)
+				} else if numbers[l]+numbers[r] < target {
+					l++
+				} else {
+					r--
+				}
+			}
+		}
+	}
+	if numbers[l]+numbers[r] != target {
+		fmt.Println("找不到")
+	}
+	return append(result, l+1, r+1)
+}
