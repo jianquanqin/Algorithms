@@ -375,17 +375,18 @@ func SearchII(nums []int, target int) bool {
 		if nums[m] == target {
 			//fmt.Println("index:", m)
 			return true
-			//如果左边升序
+			//1.如果无法判断左边升序还是右边升序
 		} else if nums[m] == nums[l] && nums[m] == nums[r] {
 			l++
 			r--
+			//如果左边升序，此时右边无序
 		} else if nums[l] <= nums[m] {
 			if target >= nums[l] && target < nums[m] {
 				r = m - 1
 			} else {
 				l = m + 1
 			}
-			//如果右边升序
+			//如果右边升序，此时左边无序
 		} else if nums[m] <= nums[r] {
 			if target > nums[m] && target <= nums[r] {
 				l = m + 1
@@ -436,8 +437,8 @@ func TwoSum(numbers []int, target int) []int {
 
 	for l < r {
 		m := (l + r) / 2
-		//fmt.Println("m", m)
-
+		//第一种情况：target是左半边两个数的和
+		//注意负数，也就是加数比和大的情况，此时m=r
 		if numbers[m] > target {
 			r = m
 			if numbers[l]+numbers[r] == target {
@@ -445,8 +446,10 @@ func TwoSum(numbers []int, target int) []int {
 			}
 		} else if target == (numbers[m] + numbers[r]) {
 			return append(result, m+1, r+1)
+			//第二种情况：target是右半边两个数的和
 		} else if target > (numbers[m] + numbers[r]) {
 			l = m + 1
+			//第三种情况：target的两个加数分别在m的两边
 		} else {
 			for l < r {
 				if numbers[l]+numbers[r] == target {
@@ -463,4 +466,35 @@ func TwoSum(numbers []int, target int) []int {
 		fmt.Println("找不到")
 	}
 	return append(result, l+1, r+1)
+}
+
+//278. 第一个错误的版本
+
+func FirstBadVersion(n int) int {
+
+	l := 1
+	r := n
+
+	for l < r {
+		m := (l + r) / 2
+
+		//fmt.Println(m)
+		//如果不是错误版本，说明正确版本在右边
+		if isBadVersion(m) == false {
+			l = m + 1
+			//如果是错误版本，错误版本在左边，也可能m就是第一个错误版本
+		} else {
+			r = m
+		}
+	}
+	return r
+}
+
+func isBadVersion(i int) bool {
+
+	if i >= 5 {
+		return true
+	} else {
+		return false
+	}
 }

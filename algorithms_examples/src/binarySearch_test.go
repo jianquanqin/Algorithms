@@ -77,3 +77,7 @@ func TestTwoSum(t *testing.T) {
 	fmt.Println(TwoSum(nums, -2))
 
 }
+
+func TestFirstBadVersion(t *testing.T) {
+	fmt.Println(FirstBadVersion(8))
+}
