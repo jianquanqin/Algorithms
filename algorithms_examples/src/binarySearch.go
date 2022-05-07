@@ -498,3 +498,71 @@ func isBadVersion(i int) bool {
 		return false
 	}
 }
+
+//209. 长度最小的子数组
+
+func MinSubArrayLen(target int, nums []int) int {
+
+	//算法一：暴力穷举
+
+	//sum := 0
+	////注意这种算法，先遍历每个元素的前1个，再遍历每一个元素的前两个，依次类推
+	//count := 0
+	//flag := false
+	//
+	//for count < len(nums) {
+	//	//nums := []int{2, 3, 1, 2, 4, 3}
+	//	//遍历所有元素
+	//	for i := count; i < len(nums); i++ {
+	//		sum = 0
+	//		//当前累加元素为count个
+	//		for j := 0; j <= count; j++ {
+	//			sum = sum + nums[i-j]
+	//			fmt.Println("count,sum,j:", count, sum, j)
+	//			if sum >= target {
+	//				flag = true
+	//				goto work
+	//			}
+	//		}
+	//		//if flag == true {
+	//		//	break
+	//		//}
+	//	}
+	//work:
+	//	count++
+	//	if flag == true {
+	//		break
+	//	}
+	//}
+	//if flag {
+	//	return count
+	//} else {
+	//	return 0
+	//}
+
+	//算法二：指针
+
+	min := math.MaxInt32
+	sum := 0
+	l := 0
+	for r := 0; r < len(nums); r++ {
+		sum += nums[r]
+		//满足窗口内的和大于target时，左边界右移，缩小边界
+		for sum >= target {
+			if min < r-l+1 {
+				min = min
+			} else {
+				min = r - l + 1
+			}
+			//窗口左边界右移
+			sum -= nums[l]
+			l++
+
+		}
+	}
+	//遍历结束，如果没有找到结果
+	if min == math.MaxInt32 {
+		return 0
+	}
+	return min
+}
