@@ -1,4 +1,4 @@
-package src
+package stack
 
 import (
 	"errors"
@@ -76,4 +76,100 @@ func (stack *Stack) Range() {
 	for i := stack.Top; i >= 0; i-- {
 		fmt.Println(stack.arr[i])
 	}
+}
+
+//20. 有效的括号
+
+func isValid(s string) bool {
+	if len(s)%2 == 1 {
+		return false
+	}
+
+	l := 0
+	r := len(s) - 1
+
+	u := "{[()]}"
+
+	flag := true
+
+	switch s[0] {
+	case u[0]:
+		if s[1] == u[5] {
+			l++
+			r--
+		} else {
+			flag = false
+		}
+	case u[1]:
+		if s[1] == u[4] {
+			l++
+			r--
+		} else {
+			flag = false
+		}
+	case u[2]:
+		if s[1] == u[3] {
+			l++
+			r--
+		} else {
+			flag = false
+		}
+	}
+	if flag == false {
+		for j := 0; j < len(s); j++ {
+
+			switch s[l] {
+			case u[0]:
+				if s[r] == u[5] {
+					l++
+					r--
+				} else {
+					return false
+				}
+			case u[1]:
+				if s[r] == u[4] {
+					l++
+					r--
+				} else {
+					return false
+				}
+			case u[2]:
+				if s[r] == u[3] {
+					l++
+					r--
+				} else {
+					return false
+				}
+			}
+		}
+	} else {
+		l = 0
+		r = 1
+		for r < len(s) {
+			if r+2 < len(s) {
+				l += 2
+				r += 2
+				switch s[l] {
+				case u[0]:
+					if s[r] == u[5] {
+					} else {
+						return false
+					}
+				case u[1]:
+					if s[r] == u[4] {
+					} else {
+						return false
+					}
+				case u[2]:
+					if s[r] == u[3] {
+					} else {
+						return false
+					}
+				}
+			} else {
+				break
+			}
+		}
+	}
+	return true
 }

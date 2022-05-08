@@ -79,3 +79,41 @@ func bubbleSortLinearList(nums []int) {
 		}
 	}
 }
+
+func largestGoodInteger(num string) string {
+
+	l := 0
+	r := 0
+
+	var result []byte
+
+	for r < len(num) && l <= r {
+
+		if r-l < 2 {
+			r++
+		}
+
+		if r-l == 2 && r < len(num) {
+			if num[r] == num[r-1] && num[r] == num[l] {
+				result = append(result, num[l])
+				r++
+				l++
+			} else {
+				l++
+			}
+		}
+	}
+	var tmp byte
+	if len(result) != 0 {
+		for _, v := range result {
+			if v > tmp {
+				tmp = v
+			}
+		}
+	} else {
+		return ""
+	}
+	s := string(tmp)
+
+	return s + s + s
+}

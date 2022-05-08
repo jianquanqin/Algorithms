@@ -1,6 +1,7 @@
 package src
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -29,4 +30,26 @@ func TestLinkedListFunction(t *testing.T) {
 	DeleteLinkedList(head, 3)
 
 	ListLinkedList(head)
+
+	fmt.Println("---")
+}
+
+func TestLeetCode(t *testing.T) {
+
+	//nums1 := []int{1}
+	//nums1 := []int{}
+	//nums2 := []int{0}
+
+	//list1 := ConstructList(nums1)
+	//list2 := ConstructList(nums2)
+
+	//result := addTwoNumbers(list1, list2)
+	//ListList(result)
+
+	//list := ConstructList(nums1)
+	//ListList(list)
+	//removeNthFromEnd(list, 1)
+	//
+	//fmt.Println(list)
+	//ListList(list)
 }
