@@ -74,7 +74,8 @@ func PrintTreeLayer(root *gotype.BNode) {
 	}
 }
 
-//
+//一层一层遍历
+
 func PrintAtLevel(root *gotype.BNode, level int) int {
 	return 1
 }
