@@ -1,7 +1,7 @@
 package main
 
 import (
-	"algorithms_examples/linear_list/src"
+	"algorithms_examples/linearList/src"
 	"fmt"
 	"time"
 )
