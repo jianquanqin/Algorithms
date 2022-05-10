@@ -3,6 +3,7 @@ package binaryTree
 import (
 	"fmt"
 	"github.com/isdamir/gotype"
+	"math"
 )
 
 //二叉树的链式表示
@@ -74,8 +75,116 @@ func PrintTreeLayer(root *gotype.BNode) {
 	}
 }
 
-//一层一层遍历
+//求二叉树的最大子树
+//找一个叶子节点测试第一次调用本函数，每一次调用都会为参数和变量开辟独立空间，但是全局参数和变量可以共用
+//事实上，递归函数只需要考虑一次调用就够了，并且无论采取什么样的base case,它都会递归完整棵树
 
-func PrintAtLevel(root *gotype.BNode, level int) int {
-	return 1
+var maxSum = math.MinInt64
+var tmp []int //可以定义一个全局变量，存储每次递归的结果
+
+func FindMaxSubTree(root *gotype.BNode, maxRoot *gotype.BNode) int {
+
+	//1.base case
+	if root == nil {
+		return 0
+	}
+
+	//2.recursion relation
+
+	//求左子树的和
+	lmax := FindMaxSubTree(root.LeftChild, maxRoot)
+	rmax := FindMaxSubTree(root.RightChild, maxRoot)
+
+	//注意这里的指定数据类型
+	sum := lmax + rmax + root.Data.(int)
+
+	//如果所加之和大于前面一棵子树，则更新当前子树为最大子树
+	if sum > maxSum {
+		maxSum = sum
+		tmp = append(tmp, sum)
+		maxRoot.Data = root.Data
+	}
+	fmt.Println(tmp)
+	fmt.Println(sum)
+	return sum
 }
+
+func CreateTree() *gotype.BNode {
+
+	root := &gotype.BNode{Data: 6}
+	node1 := &gotype.BNode{Data: 3}
+	node2 := &gotype.BNode{Data: -7}
+	node3 := &gotype.BNode{Data: -1}
+	node4 := &gotype.BNode{Data: 9}
+	node5 := &gotype.BNode{Data: 9}
+
+	root.LeftChild = node1
+	root.RightChild = node2
+	node1.LeftChild = node3
+	node1.RightChild = node4
+	node3.LeftChild = node5
+
+	return root
+}
+
+//求解二叉树的高h
+
+var height = 0
+
+func TreeHeight(root *gotype.BNode) int {
+
+	//如果根节点为空，高度为0
+	if root == nil {
+		return 0
+	}
+
+	//如果根节点左右子树都为空，说明到了叶子节点，高度为1
+	if root.LeftChild == nil && root.RightChild == nil {
+		return 1
+	}
+
+	//子树有左节点或者右节点
+	//求左子树的高
+	Lh := TreeHeight(root.LeftChild)
+	Rh := TreeHeight(root.LeftChild)
+
+	if Lh > Rh {
+		height = Lh + 1
+	} else {
+		height = Rh + 1
+	}
+
+	fmt.Println(root.Data, height)
+
+	return height
+}
+
+//判断两棵树是否相等
+//还是拿叶子节点和上一个节点来构建程序
+
+func IsEqual(root1 *gotype.BNode, root2 *gotype.BNode) bool {
+
+	//判空
+	//两个都是空树必相等
+	if root1 == nil && root2 == nil {
+		return true
+	}
+
+	//一个是空树，另一个不是空树，不相等
+	if root1 == nil && root2 != nil {
+		return false
+	}
+	if root2 == nil && root1 != nil {
+		return false
+	}
+
+	//如果两个树都不为空,比较它的根节点值与左右子树的值
+	if root1.Data == root2.Data {
+		return IsEqual(root1.LeftChild, root2.LeftChild) && IsEqual(root1.RightChild, root2.RightChild)
+	}
+
+	//如果不等则返回false
+	return false
+}
+
+//

@@ -253,3 +253,120 @@ func longestValidParenthesesII(s string) int {
 	}
 	return max
 }
+
+//剑指 Offer 09. 用两个栈实现队列
+
+type CQueue struct {
+	arr  []interface{}
+	size int
+}
+
+func Constructor() CQueue {
+	var queue = CQueue{}
+	return queue
+}
+
+func (this *CQueue) AppendTail(value int) {
+	this.arr = append(this.arr, value)
+	this.size++
+}
+
+func (this *CQueue) DeleteHead() int {
+	if this.size == 0 {
+		return -1
+	}
+	if this.size == 1 {
+		this.size--
+		first := this.arr[0].(int)
+		this.arr = this.arr[0:0]
+		return first
+	}
+	//first := this.arr[0]
+	first := this.arr[0].(int)
+	this.arr = this.arr[1:]
+	this.size--
+
+	return first
+}
+
+/**
+ * Your CQueue object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.AppendTail(value);
+ * param_2 := obj.DeleteHead();
+ */
+
+//剑指 Offer 30. 包含min函数的栈
+
+type MinStack struct {
+	arr  []interface{}
+	size int
+	min  []interface{}
+}
+
+/** initialize your data structure here. */
+
+func ConstructorMinStack() MinStack {
+	var minStack = MinStack{}
+	return minStack
+}
+
+func (this *MinStack) Push(x int) {
+
+	if this.size == 0 {
+		this.min = append(this.min, x)
+	} else {
+		if x < this.min[len(this.min)-1].(int) {
+			this.min = append(this.min, x)
+		} else {
+			this.min = append(this.min, this.min[len(this.min)-1])
+		}
+	}
+
+	this.arr = append(this.arr, x)
+	this.size++
+
+}
+
+func (this *MinStack) Pop() {
+
+	if this.size == 0 {
+		fmt.Println("the stack is empty")
+		return
+	} else {
+		this.size--
+		this.arr = this.arr[0:this.size]
+
+		this.min = this.min[0:this.size]
+		return
+	}
+}
+
+func (this *MinStack) Top() int {
+
+	if this.size == 0 {
+		fmt.Println("the stack is empty")
+		return -1
+	} else {
+		return this.arr[this.size-1].(int)
+	}
+}
+
+func (this *MinStack) Min() int {
+
+	if this.size == 0 {
+		fmt.Println("the stack is empty")
+		return -1
+	}
+
+	return this.min[this.size-1].(int)
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Push(x);
+ * obj.Pop();
+ * param_3 := obj.Top();
+ * param_4 := obj.Min();
+ */
