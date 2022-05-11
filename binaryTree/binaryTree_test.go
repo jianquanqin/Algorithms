@@ -23,9 +23,13 @@ func TestBinaryTree(t *testing.T) {
 	//h := TreeHeight(root)
 	//fmt.Println(h)
 
-	//判断两棵树是否相等
-	root1 := CreateTree()
-	root2 := CreateTree()
+	////判断两棵树是否相等
+	//root1 := CreateTree()
+	//root2 := CreateTree()
+	//
+	//fmt.Println(IsEqual(root1, root2))
 
-	fmt.Println(IsEqual(root1, root2))
+	//计算数的节点
+	root := CreateATree()
+	fmt.Println(countNodes(root))
 }

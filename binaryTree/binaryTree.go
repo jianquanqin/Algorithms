@@ -187,4 +187,91 @@ func IsEqual(root1 *gotype.BNode, root2 *gotype.BNode) bool {
 	return false
 }
 
-//
+//递归求二叉树的节点
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+var count int
+
+func countNodes(root *TreeNode) int {
+
+	if root == nil {
+		return 0
+	}
+
+	//第一种方法
+	//rootCount := 1
+	//fmt.Println("root:", root.Val)
+	//
+	//lCount := countNodes(root.Left)
+	//rCount := countNodes(root.Right)
+	//
+	//count = rootCount + lCount + rCount
+	//
+	//return count
+
+	//第二种方法
+	Llevel := BinaryLTreeHeight(root.Left)
+	Rlevel := BinaryRTreeHeight(root.Right)
+	fmt.Println(Llevel, Rlevel)
+
+	if Llevel == Rlevel {
+		count = (1 << Llevel) + countNodes(root.Right)
+	} else {
+		count = countNodes(root.Left) + (1 << Rlevel)
+	}
+	return count
+}
+
+func CreateATree() *TreeNode {
+
+	root1 := &TreeNode{Val: 1}
+	root2 := &TreeNode{Val: 2}
+	root3 := &TreeNode{Val: 3}
+	root4 := &TreeNode{Val: 4}
+	root5 := &TreeNode{Val: 5}
+	root6 := &TreeNode{Val: 6}
+	//root7 := &TreeNode{Val: 6}
+
+	root := root1
+	root.Left = root2
+	root.Right = root3
+	root2.Left = root4
+	root2.Right = root5
+	root3.Left = root6
+	//root3.Right = root7
+
+	return root
+}
+
+func BinaryLTreeHeight(root *TreeNode) (lH int) {
+
+	if root == nil {
+		return 0
+	}
+	h := 0
+
+	for root != nil {
+		root = root.Left
+		h++
+	}
+	return h
+}
+
+func BinaryRTreeHeight(root *TreeNode) (rH int) {
+
+	if root == nil {
+		return 0
+	}
+	h := 0
+
+	for root != nil {
+		root = root.Right
+		h++
+	}
+	return h
+}

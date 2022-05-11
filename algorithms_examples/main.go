@@ -10,6 +10,6 @@ func main() {
 	//
 	//nums = nums[0:2]
 	//fmt.Println(nums)
-	min := 4<<2 - 1
+	min := 100 << 3
 	fmt.Println(min)
 }

@@ -16,6 +16,10 @@ func TestDynamicPlan(t *testing.T) {
 	//fmt.Println(climbStairs(3))
 
 	//欧几里德算法
-	max := gcd(67914, 2156)
-	fmt.Println(max)
+	//max := gcd(67914, 2156)
+	//fmt.Println(max)
+
+	var cost = []int{10, 15, 20}
+
+	fmt.Println(minCostClimbingStairs(cost))
 }

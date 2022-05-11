@@ -289,4 +289,81 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return head
 }
 
-//21. 合并两个有序链表
+type Node struct {
+	Val    int
+	Next   *Node
+	Random *Node
+}
+
+//剑指 Offer 35. 复杂链表的复制
+
+func copyRandomList(head *Node) *Node {
+
+	if head == nil {
+		return nil
+	}
+
+	tmp := head
+	newHead := &Node{}
+	newHead.Val = tmp.Val
+	cur := newHead
+
+	if tmp.Next == nil {
+
+		if tmp.Random == nil {
+			cur.Random = nil
+		}
+		if tmp.Random == tmp {
+			cur.Random = cur
+		}
+
+		return newHead
+	}
+
+	for {
+		if tmp.Next == nil {
+			break
+		}
+		//新建
+		newNode := &Node{}
+		//初始化
+		newNode.Val = tmp.Next.Val
+		cur.Next = newNode
+
+		tmp = tmp.Next
+		cur = cur.Next
+	}
+
+	tmp = head
+	cur = newHead
+
+	for {
+
+		if tmp.Random == nil {
+			cur.Random = nil
+		}
+		if tmp.Random == tmp {
+			cur.Random = cur
+		}
+
+		p := head
+		q := newHead
+		for {
+			if tmp.Random == p {
+				cur.Random = q
+				break
+			}
+			p = p.Next
+			q = q.Next
+		}
+
+		fmt.Println(cur.Val)
+		if tmp.Next == nil {
+			break
+		}
+
+		tmp = tmp.Next
+		cur = cur.Next
+	}
+	return newHead
+}
