@@ -367,3 +367,88 @@ func copyRandomList(head *Node) *Node {
 	}
 	return newHead
 }
+
+//从尾到头打印链表
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+
+func reversePrint(head *ListNode) []int {
+
+	var cache []int
+	if head == nil {
+		fmt.Println("the List is empty")
+		return cache
+	}
+
+	tmp := head
+
+	for {
+
+		cache = append(cache, tmp.Val)
+
+		if tmp.Next == nil {
+			break
+		}
+
+		tmp = tmp.Next
+	}
+
+	l := 0
+	r := len(cache) - 1
+	for l < r {
+		cache[l], cache[r] = cache[r], cache[l]
+		l++
+		r--
+	}
+	return cache
+}
+
+//反转链表
+
+func reverseList(head *ListNode) *ListNode {
+	if head == nil {
+		fmt.Println("the List is empty")
+		return head
+	}
+
+	tmp := head
+	cur := head
+	var res *ListNode
+
+	if tmp.Next != nil {
+		cur = head.Next
+	}
+
+	for {
+		if cur.Next == nil {
+			res = cur
+			break
+		}
+		cur = cur.Next
+		tmp = tmp.Next
+	}
+
+	for {
+		cur.Next = tmp
+		cur = cur.Next
+		if cur == head {
+			cur.Next = nil
+			break
+		}
+
+		tmp = head
+		for {
+			if tmp.Next == cur {
+				break
+			}
+			tmp = tmp.Next
+		}
+	}
+	return res
+}
