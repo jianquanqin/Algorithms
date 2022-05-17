@@ -275,3 +275,305 @@ func BinaryRTreeHeight(root *TreeNode) (rH int) {
 	}
 	return h
 }
+
+//二叉树的层序遍历
+//遍历到二维数组
+
+func levelOrder(root *TreeNode) [][]int {
+
+	//存放结果
+	var res [][]int
+
+	if root == nil {
+		return res
+	}
+
+	//定义队列
+	var queue []*TreeNode
+
+	//入队
+	queue = append(queue, root)
+
+	//在队列不为空时遍历
+	for len(queue) > 0 {
+
+		//该层有多少个节点
+		l := len(queue)
+
+		//定义一个slice用来存放每一层的节点数据
+		var layerNodes []int
+
+		for i := 0; i < l; i++ {
+
+			//l在本轮中不会再变动
+
+			//定义队头变量
+			p := queue[0]
+			//将队头加入slice
+			layerNodes = append(layerNodes, p.Val)
+
+			//出队
+			queue = queue[1:]
+
+			//入队,左节点
+			if p.Left != nil {
+				queue = append(queue, p.Left)
+			}
+
+			//入队，右节点
+			if p.Right != nil {
+				queue = append(queue, p.Right)
+			}
+		}
+		res = append(res, layerNodes)
+	}
+	return res
+}
+
+//剑指 Offer 32 - III. 从上到下打印二叉树 III
+
+func levelOrderIII(root *TreeNode) [][]int {
+
+	var ret [][]int
+
+	if root == nil {
+		return ret
+	}
+
+	//定义队列
+	var queue []*TreeNode
+
+	//入队
+	queue = append(queue, root)
+
+	times := 1
+	//在队列不为空时遍历
+	for len(queue) > 0 {
+
+		//该层有多少个节点
+		l := len(queue)
+
+		//定义一个slice用来存放每一层的节点数据
+		var layerNodes []int
+
+		if times%2 == 1 {
+			for i := 0; i < l; i++ {
+
+				//l在本轮中不会再变动
+
+				//定义队头变量
+				p := queue[0]
+				//将队头加入slice
+				layerNodes = append(layerNodes, p.Val)
+
+				//出队
+				queue = queue[1:]
+
+				//入队,左节点
+				if p.Left != nil {
+					queue = append(queue, p.Left)
+				}
+
+				//入队，右节点
+				if p.Right != nil {
+					queue = append(queue, p.Right)
+				}
+			}
+			ret = append(ret, layerNodes)
+			//fmt.Println(layerNodes)
+			times++
+		} else {
+			for i := 0; i < l; i++ {
+
+				//l在本轮中不会再变动
+
+				//定义队头变量
+				p := queue[0]
+				//将队头加入slice
+				layerNodes = append(layerNodes, p.Val)
+
+				//出队
+				queue = queue[1:]
+
+				//入队,左节点
+				if p.Left != nil {
+					queue = append(queue, p.Left)
+				}
+
+				//入队，右节点
+				if p.Right != nil {
+					queue = append(queue, p.Right)
+				}
+
+			}
+
+			l := 0
+			r := len(layerNodes) - 1
+			fmt.Println(layerNodes)
+			for l < r {
+				layerNodes[l], layerNodes[r] = layerNodes[r], layerNodes[l]
+				l++
+				r--
+			}
+			ret = append(ret, layerNodes)
+			fmt.Println(layerNodes)
+			times++
+		}
+	}
+	return ret
+}
+
+//剑指 Offer 26. 树的子结构
+//广度优先
+
+func isSubStructure(A *TreeNode, B *TreeNode) bool {
+
+	if A == nil || B == nil {
+		return false
+	}
+
+	//先层序遍历每个节点
+
+	//建两个队列
+	var queue1 []*TreeNode
+
+	//入队
+	queue1 = append(queue1, A)
+
+	//遍历
+	for len(queue1) > 0 {
+
+		//取出队头元素
+		//同步比较
+		head1 := queue1[0]
+		queue1 = queue1[1:]
+
+		if isEqual(head1, B) == true {
+			return true
+		} else {
+			//层序入队
+			if head1.Left != nil {
+				queue1 = append(queue1, head1.Left)
+			}
+			if head1.Right != nil {
+				queue1 = append(queue1, head1.Right)
+			}
+		}
+	}
+
+	return false
+}
+
+func isEqual(A *TreeNode, B *TreeNode) bool {
+
+	if A == nil || B == nil {
+		return false
+	}
+
+	//建两个队列
+	var queue1 []*TreeNode
+	var queue2 []*TreeNode
+
+	//入队
+	queue1 = append(queue1, A)
+	queue2 = append(queue2, B)
+
+	//遍历
+	for len(queue1) > 0 && len(queue2) > 0 {
+
+		//取出队头元素
+		//同步比较
+		head1 := queue1[0]
+		queue1 = queue1[1:]
+		head2 := queue2[0]
+		queue2 = queue2[1:]
+
+		//比较A队头元素是否与B队头元素相等,比较节点值
+		if head1.Val == head2.Val {
+
+			//如果相等，比较后面的元素
+
+			//层序入队
+			if head1.Left != nil {
+				queue1 = append(queue1, head1.Left)
+			}
+			if head1.Right != nil {
+				queue1 = append(queue1, head1.Right)
+			}
+
+			if head2.Left != nil {
+				queue2 = append(queue2, head2.Left)
+			}
+			if head2.Right != nil {
+				queue2 = append(queue2, head2.Right)
+			}
+		} else {
+			fmt.Println(head1, head2)
+			return false
+		}
+	}
+	if len(queue2) == 0 {
+		return true
+	}
+	fmt.Println(queue1, queue2)
+	return false
+}
+
+//剑指 Offer 27. 二叉树的镜像
+//广度优先
+
+func mirrorTree(root *TreeNode) *TreeNode {
+
+	//if root == nil {
+	//	return root
+	//}
+	//
+	//var queue []*TreeNode
+	//queue = append(queue, root)
+	//
+	//for len(queue) > 0 {
+	//	head := queue[0]
+	//	queue = queue[1:]
+	//
+	//	if head.Left != nil {
+	//		queue = append(queue, head.Left)
+	//	}
+	//
+	//	if head.Right != nil {
+	//		queue = append(queue, head.Right)
+	//	}
+	//
+	//	//一轮交换，轮伦交换
+	//	head.Left, head.Right = head.Right, head.Left
+	//}
+	//
+	//return root
+
+	//方法二，递归
+
+	if root == nil {
+		return nil
+	}
+	left := mirrorTree(root.Left)
+	right := mirrorTree(root.Right)
+	root.Left = right
+	root.Right = left
+	return root
+}
+
+//递归
+//所有比较局部的都能递归
+
+func isSymmetric(root *TreeNode) bool {
+	return check(root, root)
+}
+
+func check(p, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	return p.Val == q.Val && check(p.Left, q.Right) && check(p.Right, q.Left)
+}

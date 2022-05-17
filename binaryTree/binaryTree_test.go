@@ -32,4 +32,5 @@ func TestBinaryTree(t *testing.T) {
 	//计算数的节点
 	root := CreateATree()
 	fmt.Println(countNodes(root))
+	fmt.Println(levelOrderIII(root))
 }

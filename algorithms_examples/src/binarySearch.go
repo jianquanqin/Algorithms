@@ -201,6 +201,36 @@ func FindMinI(nums []int) int {
 	return nums[l]
 }
 
+//剑指 Offer 11. 旋转数组的最小数字
+
+func minArray(numbers []int) int {
+
+	l := 0
+	r := len(numbers) - 1
+
+	for l < r {
+		m := (r + l) / 2
+		fmt.Println(l, m, r)
+
+		//判断右边，如果升序，最小值一定在左半边
+		if numbers[m] < numbers[r] {
+			r = m
+		} else if numbers[m] > numbers[r] {
+			l = m + 1
+		} else {
+			if numbers[l] == numbers[m] {
+				r--
+				l++
+			} else {
+				r = m
+			}
+
+		}
+
+	}
+	return numbers[l]
+}
+
 //范例 5: 154.寻找旋转排序数组中的最小值II
 //解题技巧：寻找模糊值，模版二
 //注意⚠️，此题应多次回顾，二分 + 朴素求解

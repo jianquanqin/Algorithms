@@ -19,7 +19,9 @@ func TestDynamicPlan(t *testing.T) {
 	//max := gcd(67914, 2156)
 	//fmt.Println(max)
 
-	var cost = []int{10, 15, 20}
-
-	fmt.Println(minCostClimbingStairs(cost))
+	//var cost = []int{10, 15, 20}
+	//
+	//fmt.Println(minCostClimbingStairs(cost))
+	//fmt.Println(fib(46))
+	fmt.Println(numWays(0))
 }

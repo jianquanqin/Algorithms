@@ -300,3 +300,137 @@ func missingNumber(nums []int) int {
 	}
 	return l
 }
+
+//求最大连续楼层
+
+func maxConsecutive(bottom int, top int, special []int) int {
+
+	tmp := 0
+
+	bubbleSort(special)
+
+	tmp = maxGap(special)
+	//fmt.Println(tmp)
+
+	a := special[0] - bottom
+	b := top - special[len(special)-1]
+	c := max(a, b)
+
+	if c > tmp {
+		return c
+	}
+
+	return tmp
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
+
+func bubbleSort(nums []int) []int {
+
+	for i := 0; i < len(nums); i++ {
+		change := false
+		for j := 0; j < len(nums)-1; j++ {
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+				change = true
+			}
+		}
+		if change == false {
+			//fmt.Println(nums) //演示排序过程，如果排好提前结束
+			return nums
+		}
+	}
+	return nums
+}
+
+func maxGap(nums []int) int {
+
+	if len(nums) == 1 {
+		return 0
+	}
+
+	l := 0
+	r := len(nums) - 1
+
+	//special := []int{12, 24, 38, 48}
+
+	for l < r-1 {
+		m := (r - l + 1) / 2
+		if nums[m]-nums[l] > nums[r]-nums[m] {
+			r = m
+			//fmt.Println(l, r)
+		} else {
+			//fmt.Println(l, r)
+			l = m
+		}
+	}
+	return nums[r] - nums[l] - 1
+}
+
+//剑指 Offer 04. 二维数组中的查找
+
+func findNumberIn2DArray(matrix [][]int, target int) bool {
+
+	for i := 0; i < len(matrix); i++ {
+		if findInLine(matrix[i], target) == true {
+			//fmt.Println(matrix[i])
+			return true
+		}
+	}
+	return false
+}
+
+func findInLine(nums []int, t int) bool {
+	l := 0
+	r := len(nums) - 1
+
+	for l <= r {
+		m := (r + l) / 2
+		if nums[m] == t {
+			return true
+		} else {
+			if nums[m] > t {
+				r = m - 1
+			} else {
+				l = m + 1
+			}
+		}
+	}
+	return false
+}
+
+//剑指 Offer 11. 旋转数组的最小数字
+
+func minArray(numbers []int) int {
+
+	l := 0
+	r := len(numbers) - 1
+
+	for l < r {
+		m := (r + l) / 2
+		fmt.Println(l, m, r)
+
+		//判断右边，如果升序，最小值一定在左半边
+		if numbers[m] < numbers[r] {
+			r = m
+		} else if numbers[m] > numbers[r] {
+			l = m + 1
+		} else {
+			if numbers[l] == numbers[m] {
+				r--
+				l++
+			} else {
+				r = m
+			}
+
+		}
+
+	}
+	return numbers[l]
+}

@@ -11,8 +11,19 @@ func TestString(t *testing.T) {
 	//
 	//fmt.Println(replaceSpace(s))
 
-	s := "lrloseumgh"
+	//s := "lrloseumgh"
 
-	fmt.Println(reverseLeftWords(s, 6))
+	//fmt.Println(reverseLeftWords(s, 6))
 
+	//words := []string{"a", "b", "a"}
+	//fmt.Println(removeAnagrams(words))
+
+	//a := "a"
+	//b := "b"
+	//special := []int{12, 24, 38, 48}
+
+	//fmt.Println(maxConsecutive(1, 50, special))
+
+	s := "leetcode"
+	fmt.Println(firstUniqChar(s))
 }
