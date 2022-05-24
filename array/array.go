@@ -434,3 +434,29 @@ func minArray(numbers []int) int {
 	}
 	return numbers[l]
 }
+
+//剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
+//双指针
+
+func exchange(nums []int) []int {
+
+	l := 0
+	r := len(nums) - 1
+
+	for l < r {
+
+		if nums[l]%2 == 0 && nums[r]%2 == 1 {
+			nums[l], nums[r] = nums[r], nums[l]
+			l++
+			r--
+		} else if nums[l]%2 == 1 && nums[r]%2 == 0 {
+			l++
+			r--
+		} else if nums[l]%2 == 1 && nums[r]%2 == 1 {
+			l++
+		} else if nums[l]%2 == 0 && nums[r]%2 == 0 {
+			r--
+		}
+	}
+	return nums
+}

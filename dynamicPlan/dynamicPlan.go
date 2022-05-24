@@ -3,6 +3,7 @@ package dynamicPlan
 import (
 	"fmt"
 	"math"
+	"strconv"
 )
 
 //非波那契数列
@@ -271,4 +272,62 @@ func maxProfit(prices []int) int {
 		}
 	}
 	return maxProfit
+}
+
+//剑指 Offer 46. 把数字翻译成字符串
+//和打家劫舍问题相似
+
+func translateNum(num int) int {
+
+	src := strconv.Itoa(num)
+	fmt.Printf("%T\n", src)
+
+	//每个字符串有两种翻译方法，全部按一位翻译和与相邻的数字一起翻译
+	//定义滚动变量
+	p, q, r := 0, 0, 1
+	for i := 0; i < len(src); i++ {
+		//迭代过程
+
+		p, q, r = q, r, 0
+		r = r + q
+		if i == 0 {
+			continue
+		}
+		//字符串可以切片做比较
+		pre := src[i-1 : i+1]
+		if pre <= "25" && pre >= "10" {
+			r = r + p
+		}
+	}
+	return r
+}
+
+//剑指 Offer 48. 最长不含重复字符的子字符串
+//用滑动窗口来解决
+
+func lengthOfLongestSubstring(s string) int {
+	// 哈希集合，记录每个字符是否出现过
+	m := map[byte]int{}
+	n := len(s)
+	// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+	rk, ans := -1, 0
+	for i := 0; i < n; i++ {
+		if i != 0 {
+			// 左指针向右移动一格，移除一个字符
+			//map有删除函数
+			delete(m, s[i-1])
+			fmt.Println("m1", m)
+		}
+
+		//添加不重复元素到m中，遇到一个重复值，立刻停止
+		for rk+1 < n && m[s[rk+1]] == 0 {
+			// 不断地移动右指针
+			m[s[rk+1]]++
+			rk++
+			fmt.Println("m:", m)
+		}
+		// 第 i 到 rk 个字符是一个极长的无重复字符子串
+		ans = max(ans, rk-i+1)
+	}
+	return ans
 }

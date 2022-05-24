@@ -7,8 +7,11 @@ import (
 
 func TestArray(t *testing.T) {
 
-	nums := []int{2, 2, 2, 0, 2}
-	fmt.Println(minArray(nums))
+	nums := []int{2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1}
+	fmt.Println(exchange(nums))
+
+	//nums := []int{2, 2, 2, 0, 2}
+	//fmt.Println(minArray(nums))
 	//matrix := [][]int{
 	//	{1, 4, 7, 11, 15},
 	//	{2, 5, 8, 12, 19},

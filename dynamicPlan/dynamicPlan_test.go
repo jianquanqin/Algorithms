@@ -6,6 +6,12 @@ import (
 )
 
 func TestDynamicPlan(t *testing.T) {
+	////剑指 Offer 46. 把数字翻译成字符串
+	//num := 12258
+	//fmt.Println(translateNum(num))
+
+	//剑指 Offer 48. 最长不含重复字符的子字符串
+	fmt.Println(lengthOfLongestSubstring("abcbbcd"))
 
 	//res := fib(15)
 	//fmt.Println(res)
@@ -23,5 +29,5 @@ func TestDynamicPlan(t *testing.T) {
 	//
 	//fmt.Println(minCostClimbingStairs(cost))
 	//fmt.Println(fib(46))
-	fmt.Println(numWays(0))
+	//fmt.Println(numWays(0))
 }
