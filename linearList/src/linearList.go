@@ -2,7 +2,7 @@ package src
 
 import "fmt"
 
-const MaxLen = 10
+const MaxLen = 10000
 
 //使用结构体定义固定长度的线性表
 
@@ -106,4 +106,114 @@ func (list *DynamicLinearList) InsertDynamicLinearList(i int, value int) {
 	}
 	list.IntList[i-1] = tmp
 	list.Len++
+}
+
+//定义一个结构体当做队列，里面两个属性，一个泛型切片和一个用于表示队列当前长度的整型
+type CQueue struct {
+
+arr []interface{}
+size int
+
+}
+
+
+// func Constructor() CQueue {
+// var queue = CQueue{} //实例
+// 	return queue
+
+// }
+
+
+func (queue *CQueue) AppendTail(value int)  {
+queue.arr = append(queue.arr, value)//因为没有定义队列容量有上限
+	queue.size++
+}
+
+
+func (queue *CQueue) DeleteHead() int {
+
+if queue.size == 0 {
+		return -1
+	}
+	if queue.size == 1 {
+		queue.size--
+		first := queue.arr[0].(int)//标注类型
+		queue.arr = queue.arr[0:0]
+		return first
+	}
+	//first := queue.arr[0]
+	first := queue.arr[0].(int)
+	queue.arr = queue.arr[1:]
+	queue.size--
+
+	return first
+}
+
+type MinStack struct {
+
+arr  []interface{}
+size int
+min  []interface{}  
+
+}
+
+
+/** initialize your data structure here. */
+func Constructor() MinStack {
+var minStack = MinStack{}
+	return minStack
+}
+
+
+func (this *MinStack) Push(x int)  {
+if this.size == 0 {
+		this.min = append(this.min, x)
+	} else {
+		if x < this.min[len(this.min)-1].(int) {
+			this.min = append(this.min, x)
+		} else {
+			this.min = append(this.min, this.min[len(this.min)-1])
+		}
+	}
+
+	this.arr = append(this.arr, x)
+	this.size++
+}
+
+
+func (this *MinStack) Pop()  {
+if this.size == 0 {
+		fmt.Println("the stack is empty")
+		return
+	} else {
+		this.size--
+		this.arr = this.arr[0:this.size]
+
+		this.min = this.min[0:this.size]
+		return
+	}
+}
+
+
+func (this *MinStack) Top() int {
+
+	if this.size == 0 {
+		fmt.Println("the stack is empty")
+		return -1
+	} else {
+		return this.arr[this.size-1].(int)
+	}
+
+}
+
+
+func (this *MinStack) Min() int {
+
+	if this.size == 0 {
+		fmt.Println("the stack is empty")
+		return -1
+	}
+
+	return this.min[this.size-1].(int)
+
 }
