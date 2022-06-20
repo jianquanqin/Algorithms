@@ -217,3 +217,159 @@ func (this *MinStack) Min() int {
 	return this.min[this.size-1].(int)
 
 }
+
+
+
+func ReversePrint(head *ListNode) []int {
+
+	var array []int
+	array = append(array,head.Val)
+	if head.Next == nil {	
+		return array
+	}
+
+    tmp := head
+
+    for {
+	if tmp.Next == nil {
+		break
+	}
+	tmp = tmp.Next
+	array = append(array,tmp.Val)
+    }
+    return ReverseArr(array)
+}
+
+func ReverseArr(nums []int) []int {
+	if len(nums) <= 1 {
+		return nums
+	}
+
+	l :=0
+	r :=len(nums)-1
+
+	for l<r {
+		nums[l],nums[r] = nums[r],nums[l]
+		l ++
+		r --
+	}
+
+	return nums
+}
+
+func ReverseList(head *ListNode) *ListNode {
+
+	if head == nil {
+			fmt.Println("the List is empty")
+			return head
+		}
+	
+		tmp := head
+		cur := head
+		var res *ListNode
+		
+	
+		if tmp.Next != nil {
+			cur = head.Next
+		}
+	
+		for {
+			if cur.Next == nil {
+				res = cur
+				break
+			}
+			cur = cur.Next
+			tmp = tmp.Next
+		}
+	
+		for {
+			cur.Next = tmp
+			cur = cur.Next
+			if cur == head {
+				cur.Next=nil
+				break
+			}
+	
+			tmp = head
+			for {
+				if tmp.Next == cur {
+					break
+				}
+				tmp = tmp.Next
+			}
+		}
+		return res
+	}
+	
+func CopyRandomList(head *Node) *Node {
+
+	if head == nil {
+		return nil
+	 }
+  
+	 newHead := &Node{}
+	 tmp := head
+	  newHead.Val = tmp.Val
+  
+	  cur := newHead
+  
+	  if tmp.Next == nil {
+		  
+		  if tmp.Random == nil {
+			  cur.Random = nil
+		  }
+		  if tmp.Random == tmp {
+			  cur.Random = cur
+		  }
+		  
+		  return newHead
+	  }
+  
+	  for {
+		  if tmp.Next == nil {
+			  break
+		  }
+		  //新建
+		  newNode := &Node{}
+		  //初始化
+		  newNode.Val = tmp.Next.Val
+		  cur.Next = newNode
+  
+		  tmp = tmp.Next
+		  cur = cur.Next
+	  }
+  
+	  tmp = head
+	  cur = newHead
+  
+	  for {
+		  
+		  if tmp.Random == nil {
+			  cur.Random = nil
+		  }
+		  if tmp.Random == tmp {
+			  cur.Random = cur
+		  }
+  
+		  p := head
+		  q := newHead
+		  for {
+			  if tmp.Random == p {
+				  cur.Random = q
+				  break
+			  }
+			  p = p.Next
+			  q = q.Next
+		  }
+  
+		  fmt.Println(cur.Val)
+		if tmp.Next == nil {
+			  break
+		  }
+  
+		  tmp = tmp.Next
+		  cur = cur.Next
+	  }
+	  return newHead
+}
+  
