@@ -8,6 +8,7 @@ func replaceSpace(s string) string {
 	for i := 0; i < len(s); i++ {
 
 		if s[i] == u[0] {
+			
 			res = append(res, u[1:]...)
 		} else {
 			res = append(res, s[i])
@@ -99,4 +100,32 @@ func firstUniqChar(s string) byte {
 	res := " "
 
 	return res[0]
+}
+
+//offer 05
+func ReplaceSpace(s string) string {
+
+	var res []byte
+	con := "%20"
+
+	for i:=0;i<len(s);i++ {
+
+		if s[i] == byte(' ') {
+			res = append(res,con[:]...)
+		}else {
+			res = append(res,s[i])
+		}
+	}
+	return string(res)
+}
+
+func ReverseLeftWords(s string, n int) string {
+
+	var res []byte
+
+	res = append(res,s[n:]...)
+	res = append(res,s[:n]...)
+
+	// fmt.Println(res)
+	return string(res)
 }

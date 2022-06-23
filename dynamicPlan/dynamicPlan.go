@@ -331,3 +331,16 @@ func lengthOfLongestSubstring(s string) int {
 	}
 	return ans
 }
+
+func Fib(n int) int {
+
+	cache := make(map[int]int)
+
+	// const mod int = 1e9 + 7
+	if n < 2 {
+		return n
+	}
+
+	cache[n] = fib(n-1) + fib(n-2)
+	return cache[n]
+}

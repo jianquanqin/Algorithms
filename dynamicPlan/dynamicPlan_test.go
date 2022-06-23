@@ -11,7 +11,7 @@ func TestDynamicPlan(t *testing.T) {
 	//fmt.Println(translateNum(num))
 
 	//剑指 Offer 48. 最长不含重复字符的子字符串
-	fmt.Println(lengthOfLongestSubstring("abcbbcd"))
+	// fmt.Println(lengthOfLongestSubstring("abcbbcd"))
 
 	//res := fib(15)
 	//fmt.Println(res)
@@ -30,4 +30,6 @@ func TestDynamicPlan(t *testing.T) {
 	//fmt.Println(minCostClimbingStairs(cost))
 	//fmt.Println(fib(46))
 	//fmt.Println(numWays(0))
+
+	fmt.Println(Fib(4))
 }

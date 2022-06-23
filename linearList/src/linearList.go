@@ -1,6 +1,9 @@
 package src
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 const MaxLen = 10000
 
@@ -373,3 +376,62 @@ func CopyRandomList(head *Node) *Node {
 	  return newHead
 }
   
+func exchange(nums []int) []int {
+
+	if len(nums) <= 1 {
+		return nums
+	} 
+
+	l := 0
+	r := len(nums)-1
+
+	for l<r {
+		if nums[l] % 2 == 1 {
+			l ++ 
+		}else {
+			if nums[r] % 2 == 0 {
+				r --
+			}else {
+				nums[l],nums[r] = nums[r], nums[l]
+			}
+		}
+	}
+	return nums
+}
+
+func twoSum(nums []int, target int) []int {
+
+	
+		left :=0
+		right :=len(nums)-1
+		for left<right{
+			 sum := nums[left]+nums[right]
+			if sum==target{
+				return []int{nums[left],nums[right]}
+			}else if sum>target{
+				right--
+			}else {
+				left++
+			}
+		}
+		return nil
+	}
+
+
+func reverseWords(s string) string {
+
+	var res string
+    var i = len(s) - 1
+    var j = i
+    for i >= 0{
+        for i >=0 && s[i] == ' '{
+            i--
+        }
+        j = i
+        for i >= 0 && s[i] != ' '{
+            i--
+        }
+        res += s[i+1:j+1] + " "
+    }
+    return strings.TrimRight(res, " ")
+}
