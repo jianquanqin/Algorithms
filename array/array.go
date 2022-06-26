@@ -475,3 +475,39 @@ func ContainsDuplicate(nums []int) bool {
 	return false
  
  }
+
+ func average(salary []int) float64 {
+
+	if len(salary) <=2 {
+		return 0
+	}
+
+	l := len(salary)-2
+	
+	max := float64(salary[0])
+	min := float64(salary[0])
+
+	for _,val := range salary {
+
+		if float64(val) > max {
+			max = float64(val)
+		}
+
+	}
+
+	for _,val := range salary {
+		if float64(val) < min {
+			min = float64(val)
+		}
+	}
+
+	var sum float64
+
+	for _, val := range salary {
+
+		sum = sum + float64(val)
+	}
+
+	return (sum - min - max ) /float64(l)
+
+}
