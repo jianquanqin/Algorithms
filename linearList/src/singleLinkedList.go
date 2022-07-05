@@ -412,19 +412,26 @@ func reversePrint(head *ListNode) []int {
 //反转链表
 
 func reverseList(head *ListNode) *ListNode {
+
+	//1.判断链表是否只有一个头节点，头节点是否为空
 	if head == nil {
 		fmt.Println("the List is empty")
 		return head
 	}
 
+	//2.初始化两个临时节点
 	tmp := head
 	cur := head
+	//定义返回值
 	var res *ListNode
 
+
+	//3.让cur先tmp一步
 	if tmp.Next != nil {
 		cur = head.Next
 	}
 
+	//4.把他们都移到链尾
 	for {
 		if cur.Next == nil {
 			res = cur
@@ -434,14 +441,17 @@ func reverseList(head *ListNode) *ListNode {
 		tmp = tmp.Next
 	}
 
+	//5.反向链接
 	for {
 		cur.Next = tmp
 		cur = cur.Next
+		//终止条件
 		if cur == head {
 			cur.Next = nil
 			break
 		}
 
+		//重新移动tmp至头节点
 		tmp = head
 		for {
 			if tmp.Next == cur {
